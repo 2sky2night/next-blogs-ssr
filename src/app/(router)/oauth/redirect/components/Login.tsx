@@ -4,7 +4,6 @@ import { Token } from "@/utils/token";
 import { useEffect, useState } from "react";
 import { Button } from "antd";
 import { useRouter } from "next/navigation";
-import request from "@/utils/request";
 import { NEXT_API } from "@/config";
 import { useUserStore } from "@/store";
 
@@ -23,7 +22,7 @@ export default function Login({ token, body }: Props) {
       // 保存token到本地(作为客户端渲染模式)
       Token.set(r.data.access_token);
       // 发送请求获取sessionId
-      await fetch(NEXT_API + "/login", {
+      await fetch(NEXT_API + "/auth/login", {
         headers: {
           Authorization: `Bearer ${r.data.access_token}`,
         },
@@ -48,7 +47,11 @@ export default function Login({ token, body }: Props) {
     );
   } else {
     return (
-      <div className="mt-2">
+      <div className="mt-2 flex flex-col items-center">
+        <div className="mb-1 flex flex-col items-center">
+          <p>Wait a while, you will be redirected to the homepage.</p>
+          <p className="text-sm">Not jumped? Click the button below.</p>
+        </div>
         <Button
           type="primary"
           onClick={handleClick}>

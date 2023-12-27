@@ -19,6 +19,7 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
     <body className={inter.className}>
       <StyledComponentsRegistry>
         <div className="h-dvh flex flex-col">
+          {/*@ts-expect-error Server Component*/}
           <Header></Header>
           <Main>{children}</Main>
         </div>

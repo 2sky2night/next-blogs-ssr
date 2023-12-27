@@ -29,3 +29,16 @@ export const verifyTokenAPI = (token: string) => {
     },
   });
 };
+
+/**
+ * 通过token获取用户信息
+ * @param token token信息
+ * @returns 
+ */
+export const getUserInfoAPI = (token: string) => {
+  return request.get<UserInfoResponse>("/auth/info", {
+    headers: {
+      Authorization: token,
+    },
+  });
+};

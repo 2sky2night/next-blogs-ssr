@@ -1,5 +1,8 @@
+import { Button } from "antd";
 
 export default function Home() {
   
-  return <div>很多的帖子</div>;
+  return <div>
+    <Button type='primary'>231</Button>
+  </div>;
 }

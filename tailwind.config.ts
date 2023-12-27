@@ -38,5 +38,8 @@ const config: Config = {
     },
   },
   plugins: [],
+  corePlugins: {
+    // preflight: false, // 添加这一行 解决antd样式冲突问题
+  },
 };
 export default config;

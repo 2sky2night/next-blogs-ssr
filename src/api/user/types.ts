@@ -18,3 +18,8 @@ interface LoginResponse {
  * 校验token的响应结果
  */
 type VerifyTokenResponse = null;
+
+/**
+ * 用户信息的响应结果
+ */
+type UserInfoResponse = LoginWithGithubBody;

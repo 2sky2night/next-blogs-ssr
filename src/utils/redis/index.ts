@@ -41,4 +41,24 @@ export class Redis {
       return Promise.reject(error);
     }
   }
+  /**
+   * 从redis数据库中删除一个key
+   * @param key
+   * @returns
+   */
+  static async remove(key: string) {
+    try {
+      await redisClient.connect();
+      const value = await redisClient.del(key);
+      await redisClient.disconnect();
+      if (value) {
+        return Promise.resolve();
+      } else {
+        // 删除失败或不存在
+        return Promise.reject('Delete Failed.');
+      }
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
 }

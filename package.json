@@ -16,6 +16,7 @@
     "antd": "^5.12.5",
     "axios": "^1.6.2",
     "next": "14.0.4",
+    "pino": "^8.17.2",
     "react": "^18",
     "react-dom": "^18",
     "redis": "^4.6.12",
@@ -38,6 +39,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
     "postcss": "^8",
+    "postcss-antd-fixes": "^0.2.0",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   },
