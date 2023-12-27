@@ -1,8 +1,8 @@
 import React from "react";
 import { Inter } from "next/font/google";
 import StyledComponentsRegistry from "@/components/common/AntdRegistry";
-import Header from "./components/Header";
-import Main from "./components/Main";
+import Header from "./(router)/components/Header";
+import Main from "./(router)/components/Main";
 import "@/app/globals.css";
 import type { Metadata } from "next";
 

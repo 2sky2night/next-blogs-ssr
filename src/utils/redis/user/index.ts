@@ -11,7 +11,7 @@ export class UserRedis extends Redis {
     try {
       const token = await this.get(sessionId);
       if (token === null) {
-        return null;
+        return Promise.reject("redis数据库中无此sessionId");
       }
       const res = await getUserInfoAPI(token);
       return res.data;

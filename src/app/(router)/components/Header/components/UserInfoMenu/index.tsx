@@ -21,6 +21,19 @@ function renderMenu(username: string, isLoading: boolean): MenuProps["items"] {
       label: <span>Welcome,{username}!</span>,
     },
     {
+      key: "/posts",
+      label: (
+        <>
+          <LogoutIcon></LogoutIcon>
+          <span className="ml-3">Publish Article</span>
+        </>
+      ),
+    },
+    {
+      key: "0000",
+      type: "divider",
+    },
+    {
       key: "logout",
       label: isLoading ? (
         <Spin>
@@ -28,24 +41,6 @@ function renderMenu(username: string, isLoading: boolean): MenuProps["items"] {
           <span className="ml-3">Logout</span>
         </Spin>
       ) : (
-        <>
-          <LogoutIcon></LogoutIcon>
-          <span className="ml-3">Logout</span>
-        </>
-      ),
-    },
-    {
-      key: "3",
-      label: (
-        <>
-          <LogoutIcon></LogoutIcon>
-          <span className="ml-3">Logout</span>
-        </>
-      ),
-    },
-    {
-      key: "4",
-      label: (
         <>
           <LogoutIcon></LogoutIcon>
           <span className="ml-3">Logout</span>
@@ -68,6 +63,9 @@ export default function UserInfoMenu({ avatar_url, uid, username }: UserInfo) {
         // 登出后重新加载页面
         router.refresh();
       });
+    } else if (e.key.includes("/")) {
+      // 路由导航
+      router.push(e.key);
     }
   };
   return (
