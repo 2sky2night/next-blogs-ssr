@@ -1,7 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
-import { message } from "antd";
-import { API, NEXT_API } from "@/config";
-import { useUserStore } from "@/store";
+import { API } from "@/config";
 
 const http = axios.create({
   baseURL: API,
@@ -40,7 +38,7 @@ http.interceptors.response.use(
     //   console.log("node环境 " + `Error:  ${error.toString()}`);
     // }
     return Promise.reject(error);
-  }
+  },
 );
 
 export default {
@@ -50,7 +48,7 @@ export default {
   post<T>(
     url: string,
     data = {},
-    config: AxiosRequestConfig = {}
+    config: AxiosRequestConfig = {},
   ): Promise<RResponse<T>> {
     return http.post(url, data, config);
   },

@@ -13,7 +13,6 @@ interface Props {
 
 export default async function OAuth({ searchParams }: Props) {
   if (searchParams.code) {
-
     // 获取githubtoken
     const { access_token } = await getGithubUserToken(searchParams.code);
     // 获取github用户信息
@@ -22,10 +21,12 @@ export default async function OAuth({ searchParams }: Props) {
     return (
       <div className="h-full flex flex-col items-center pt-20">
         <img
+          alt={`${userInfo.login}'s avatar`}
           width={300}
           height={300}
           className="object-contain rounded-full"
-          src={userInfo.avatar_url}></img>
+          src={userInfo.avatar_url}
+        ></img>
         <h1 className="mt-7 text-4xl select-none cursor-context-menu">
           Hello,{userInfo.login}
         </h1>

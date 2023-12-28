@@ -1,7 +1,7 @@
 "use client";
 
 import { getArticlesAPI } from "@/api/article";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ArticleItem from "../item/ArticleItem";
 import { emitter } from "@/utils/mitt";
 import { Spin } from "antd";
@@ -20,6 +20,11 @@ export default function ArticleList(props: Props) {
   let hasMore = useRef(props.initHasMore);
   // 是否正在加载
   const [isLoading, setIsLoading] = useState(false);
+
+  // 缓存文章列表节点
+  const articles = useMemo(() => {
+    return list.map((item) => <ArticleItem key={item.aid} {...item} />);
+  }, [list]);
 
   // 获取数据
   const handleGetData = async (num: number) => {
@@ -43,6 +48,7 @@ export default function ArticleList(props: Props) {
     handleGetData(pageNum + 1);
   };
 
+  // 初始化添加滚动监听器
   useEffect(() => {
     // 没有更多了
     if (hasMore.current === false) return;
@@ -55,12 +61,7 @@ export default function ArticleList(props: Props) {
 
   return (
     <ul>
-      {list.map((item) => (
-        <ArticleItem
-          key={item.aid}
-          {...item}
-        />
-      ))}
+      {articles}
       {isLoading && (
         <div className="flex my-3 justify-center">
           <Spin />

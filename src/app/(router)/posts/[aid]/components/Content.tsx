@@ -10,7 +10,7 @@ export default function Content(props: { content: string; tags: TagBase[] }) {
       <Divider>
         <span className="text-gray-400">End</span>
       </Divider>
-      <ul>
+      <ul className="flex space-x-2">
         {props.tags.map((tag) => (
           <li key={tag.tid}>
             <TagItem tag={tag}></TagItem>
