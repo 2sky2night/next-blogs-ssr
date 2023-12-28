@@ -1,6 +1,5 @@
 "use client";
 import { loginWithGithubAPI } from "@/api/user";
-import { Token } from "@/utils/token";
 import { useEffect, useState } from "react";
 import { Button } from "antd";
 import { useRouter } from "next/navigation";
@@ -19,8 +18,6 @@ export default function Login({ token, body }: Props) {
   const userStore = useUserStore();
   useEffect(() => {
     loginWithGithubAPI(`Bearer ${token}`, body).then(async (r) => {
-      // 保存token到本地(作为客户端渲染模式)
-      Token.set(r.data.access_token);
       // 发送请求获取sessionId
       await fetch(NEXT_API + "/auth/login", {
         headers: {
@@ -49,7 +46,7 @@ export default function Login({ token, body }: Props) {
     return (
       <div className="mt-2 flex flex-col items-center">
         <div className="mb-1 flex flex-col items-center">
-          <p>Wait a while, you will be redirected to the homepage.</p>
+          <p>Wait a while, you will be redirected to the home page.</p>
           <p className="text-sm">Not jumped? Click the button below.</p>
         </div>
         <Button

@@ -1,8 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Avatar, Dropdown, Spin } from "antd";
-import { LogoutOutlined as LogoutIcon } from "@ant-design/icons";
+import { Avatar, Dropdown, Spin, message } from "antd";
+import {
+  LogoutOutlined as LogoutIcon,
+  FormOutlined as PostIcon,
+  UserOutlined as UserIcon,
+} from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { useUserStore } from "@/store";
 import { useRouter } from "next/navigation";
@@ -21,10 +25,19 @@ function renderMenu(username: string, isLoading: boolean): MenuProps["items"] {
       label: <span>Welcome,{username}!</span>,
     },
     {
+      key: "my~",
+      label: (
+        <>
+          <UserIcon></UserIcon>
+          <span className="ml-3">My</span>
+        </>
+      ),
+    },
+    {
       key: "/posts",
       label: (
         <>
-          <LogoutIcon></LogoutIcon>
+          <PostIcon></PostIcon>
           <span className="ml-3">Publish Article</span>
         </>
       ),
@@ -66,6 +79,9 @@ export default function UserInfoMenu({ avatar_url, uid, username }: UserInfo) {
     } else if (e.key.includes("/")) {
       // 路由导航
       router.push(e.key);
+    } else if (e.key.includes("~")) {
+      // 待开发
+      message.info("Coming soon.");
     }
   };
   return (
@@ -74,7 +90,9 @@ export default function UserInfoMenu({ avatar_url, uid, username }: UserInfo) {
       menu={{ items, onClick: handleClick }}
       placement="bottomLeft"
       arrow={{ pointAtCenter: true }}>
-      <Avatar src={avatar_url}></Avatar>
+      <Avatar
+        src={avatar_url}
+        alt={`${username}'s avatar`}></Avatar>
     </Dropdown>
   );
 }
